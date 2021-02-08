@@ -1,0 +1,50 @@
+/*
+ * Created by Muhammad Utsman on 6/2/21 10:01 PM
+ * Copyright (c) 2021
+ */
+
+apply plugin: 'com.android.application'
+apply plugin: "androidx.navigation.safeargs"
+apply from: "$rootDir/dependencies/plugins.gradle"
+
+android {
+
+    dynamicFeatures = [':downloader', ':features:favorite']
+    defaultConfig {
+        applicationId "com.utsman.wallpaper"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+apply from: "$rootDir/dependencies/android.gradle"
+apply from: "$rootDir/dependencies/commons.gradle"
+apply from: "$rootDir/dependencies/deps.gradle"
+
+dependencies {
+    implementation project(":core")
+    implementation project(":data")
+    implementation project(":domain")
+
+    implementation "com.google.android.play:core:1.9.1"
+    implementation 'com.karumi:dexter:6.2.2'
+    implementation 'com.github.chrisbanes:PhotoView:2.1.4'
+
+    // lifecycle
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
+    //noinspection LifecycleAnnotationProcessorWithJava8
+    kapt 'androidx.lifecycle:lifecycle-compiler:2.2.0'
+
+    // navigation component
+    api 'androidx.navigation:navigation-fragment-ktx:2.3.3'
+    api 'androidx.navigation:navigation-ui-ktx:2.3.3'
+    api 'androidx.navigation:navigation-dynamic-features-fragment:2.3.3'
+}

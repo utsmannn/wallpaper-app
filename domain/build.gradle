@@ -1,0 +1,16 @@
+/*
+ * Created by Muhammad Utsman on 6/2/21 10:01 PM
+ * Copyright (c) 2021
+ */
+
+apply plugin: 'com.android.library'
+apply from: "$rootDir/dependencies/plugins.gradle"
+
+apply from: "$rootDir/dependencies/android.gradle"
+apply from: "$rootDir/dependencies/commons.gradle"
+apply from: "$rootDir/dependencies/deps.gradle"
+
+dependencies {
+    implementation project(":core")
+    implementation project(":data")
+}

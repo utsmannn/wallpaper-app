@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by Muhammad Utsman on 6/2/21 10:01 PM
+  ~ Copyright (c) 2021
+  -->
+
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/home">
+
+    <fragment
+        android:id="@+id/home"
+        android:name="com.utsman.wallpaper.home.HomeFragment"
+        android:label="@string/label_home" >
+        <action
+            android:id="@+id/action_home_to_homeFavorite"
+            app:destination="@id/favorite" />
+        <action
+            android:id="@+id/action_home_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/favorite"
+        android:name="com.utsman.favorite.FavoriteFragment"
+        app:moduleName="Wallpaper.features.favorite"
+        android:label="@string/label_favorite" >
+        <action
+            android:id="@+id/action_favorite_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.utsman.wallpaper.detail.DetailFragment"
+        android:label="@string/label_detail" />
+
+</navigation>

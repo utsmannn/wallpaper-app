@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by Muhammad Utsman on 6/2/21 10:01 PM
+  ~ Copyright (c) 2021
+  -->
+
+<manifest xmlns:dist="http://schemas.android.com/apk/distribution"
+    package="com.utsman.downloader">
+
+    <dist:module
+        dist:instant="false"
+        dist:title="@string/title_downloader">
+        <dist:delivery>
+            <dist:on-demand />
+        </dist:delivery>
+        <dist:fusing dist:include="true" />
+    </dist:module>
+</manifest>

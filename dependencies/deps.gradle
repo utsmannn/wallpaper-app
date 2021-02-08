@@ -1,0 +1,43 @@
+
+/*
+ * Created by Muhammad Utsman on 6/2/21 10:01 PM
+ * Copyright (c) 2021
+ */
+
+dependencies {
+    // coroutine
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2-native-mt'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1'
+
+    // hilt dependency injection
+    //noinspection GradleDependency
+    implementation 'com.google.dagger:hilt-android:2.28-alpha'
+    //noinspection GradleDependency
+    implementation 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha02'
+    kapt 'com.google.dagger:hilt-android-compiler:2.28-alpha'
+    //noinspection GradleDependency
+    kapt 'androidx.hilt:hilt-compiler:1.0.0-alpha02'
+
+    // paging3
+    //noinspection GradleDependency
+    implementation 'androidx.paging:paging-runtime:3.0.0-alpha10'
+
+    // room
+    implementation 'androidx.room:room-runtime:2.2.6'
+    implementation 'androidx.room:room-ktx:2.2.6'
+    kapt 'androidx.room:room-compiler:2.2.6'
+
+    // retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.okhttp3:okhttp:4.7.2'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.4.1'
+    implementation 'com.squareup.okhttp3:okhttp-urlconnection:4.7.2'
+    implementation 'org.conscrypt:conscrypt-android:2.2.1'
+
+    // gson
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.0'
+
+    // glide
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    kapt 'com.github.bumptech.glide:compiler:4.11.0'
+}

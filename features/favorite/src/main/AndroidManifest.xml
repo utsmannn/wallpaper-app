@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by Muhammad Utsman on 8/2/21 11:52 AM
+  ~ Copyright (c) 2021
+  -->
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:dist="http://schemas.android.com/apk/distribution"
+    package="com.utsman.favorite">
+
+    <dist:module
+        dist:instant="false"
+        dist:title="@string/title_favorite">
+        <dist:delivery>
+            <dist:on-demand />
+        </dist:delivery>
+        <dist:fusing dist:include="true" />
+    </dist:module>
+</manifest>

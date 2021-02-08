@@ -1,0 +1,12 @@
+/*
+ * Created by Muhammad Utsman on 6/2/21 10:01 PM
+ * Copyright (c) 2021
+ */
+include ':features:favorite'
+
+include ':downloader'
+include ':domain'
+include ':data'
+include ':core'
+include ':app'
+rootProject.name = "Wallpaper"

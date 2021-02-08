@@ -1,0 +1,9 @@
+
+/*
+ * Created by Muhammad Utsman on 6/2/21 10:01 PM
+ * Copyright (c) 2021
+ */
+
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'

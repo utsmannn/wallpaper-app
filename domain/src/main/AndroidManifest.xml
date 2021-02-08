@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by Muhammad Utsman on 6/2/21 10:01 PM
+  ~ Copyright (c) 2021
+  -->
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.utsman.domain">
+
+</manifest>

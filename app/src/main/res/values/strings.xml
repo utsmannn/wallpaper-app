@@ -1,0 +1,16 @@
+<!--
+  ~ Created by Muhammad Utsman on 6/2/21 10:01 PM
+  ~ Copyright (c) 2021
+  -->
+
+<resources>
+    <string name="app_name">Wallpaper</string>
+    <string name="favorite">Favorite</string>
+    <string name="label_home">HomeFragment</string>
+    <string name="label_favorite">HomeFavorite</string>
+    <string name="favorites_not_found">Favorites not found!</string>
+    <string name="sample_unplash_alt">Photo by uhuy on unsplash</string>
+    <string name="label_detail">DetailFragment</string>
+    <string name="title_downloader">Downloader</string>
+    <string name="title_favorite">Favorite</string>
+</resources>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by Muhammad Utsman on 6/2/21 10:01 PM
+  ~ Copyright (c) 2021
+  -->
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/appbar_main"
+        android:orientation="vertical">
+
+        <View
+            android:id="@+id/fake_status_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll|enterAlways" />
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:layout_scrollFlags="scroll|enterAlways" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/nav_host_container"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:defaultNavHost="true"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navGraph="@navigation/main_nav_graph" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:id="@+id/btn_scroll_up"
+        android:layout_margin="12dp"
+        android:src="@drawable/ic_round_keyboard_arrow_up_24"
+        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
+        tools:ignore="ContentDescription" />
+
+    <View
+        android:id="@+id/transparent_status_bar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/transparent_status_bar" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

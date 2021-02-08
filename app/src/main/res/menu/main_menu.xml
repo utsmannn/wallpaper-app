@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by Muhammad Utsman on 6/2/21 10:01 PM
+  ~ Copyright (c) 2021
+  -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/favorite"
+        android:icon="@drawable/ic_round_favorite_24"
+        android:title="@string/favorite"
+        app:showAsAction="always"
+        tools:ignore="UnusedAttribute" />
+
+</menu>
