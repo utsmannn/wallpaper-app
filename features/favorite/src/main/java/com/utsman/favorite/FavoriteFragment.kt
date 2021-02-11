@@ -47,7 +47,7 @@ class FavoriteFragment : Fragment(R.layout.fragment_favorite) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding?.run {
+        binding.run {
             mainViewModel.setToolbarTitle(getString(resString.favorite))
             recyclerViewFavorite.run {
                 val gridLayout = GridLayoutManager(context, 2)
@@ -76,7 +76,6 @@ class FavoriteFragment : Fragment(R.layout.fragment_favorite) {
             }
         }
     }
-
 
     override fun onResume() {
         super.onResume()
