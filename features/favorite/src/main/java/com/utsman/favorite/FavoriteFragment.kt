@@ -38,6 +38,7 @@ class FavoriteFragment : Fragment(R.layout.fragment_favorite) {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         loadKoinModules(FavoriteModule.module)
+
     }
 
     override fun onDetach() {
