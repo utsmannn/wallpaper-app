@@ -30,6 +30,7 @@ android {
 apply from: "$rootDir/dependencies/android.gradle"
 apply from: "$rootDir/dependencies/commons.gradle"
 apply from: "$rootDir/dependencies/deps.gradle"
+apply from: "$rootDir/dependencies/test.gradle"
 
 dependencies {
     implementation project(":core")

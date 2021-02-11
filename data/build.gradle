@@ -9,9 +9,11 @@ apply from: "$rootDir/dependencies/plugins.gradle"
 apply from: "$rootDir/dependencies/android.gradle"
 apply from: "$rootDir/dependencies/commons.gradle"
 apply from: "$rootDir/dependencies/deps.gradle"
+apply from: "$rootDir/dependencies/test.gradle"
 
 dependencies {
     implementation project(":core")
+
 
     implementation "net.zetetic:android-database-sqlcipher:4.4.0"
     implementation "androidx.sqlite:sqlite-ktx:2.1.0"
