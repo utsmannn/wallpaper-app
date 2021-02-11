@@ -11,7 +11,10 @@ import com.utsman.core.Network
 import com.utsman.data.local.Constants
 import com.utsman.data.local.database.FavoriteDataBase
 import com.utsman.data.remote.Services
+import net.sqlcipher.database.SQLiteDatabase
+import net.sqlcipher.database.SupportFactory
 import okhttp3.CertificatePinner
+import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
 object DataModule {
@@ -19,7 +22,14 @@ object DataModule {
     val module = module {
 
         single {
-            Room.databaseBuilder(get(), FavoriteDataBase::class.java, "favorite_db")
+            val passphrase = SQLiteDatabase.getBytes("utsmannn".toCharArray())
+            val factory = SupportFactory(passphrase)
+
+            Room.databaseBuilder(
+                androidContext(),
+                FavoriteDataBase::class.java, "favorites.db"
+            ).fallbackToDestructiveMigration()
+                .openHelperFactory(factory)
                 .build()
         }
 

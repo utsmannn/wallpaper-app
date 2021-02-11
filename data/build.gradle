@@ -12,4 +12,7 @@ apply from: "$rootDir/dependencies/deps.gradle"
 
 dependencies {
     implementation project(":core")
+
+    implementation "net.zetetic:android-database-sqlcipher:4.4.0"
+    implementation "androidx.sqlite:sqlite-ktx:2.1.0"
 }
