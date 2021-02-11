@@ -15,4 +15,9 @@ interface WallpapersUseCase {
     val wallpaperDetail: MutableLiveData<ResultState<Wallpaper>>
     suspend fun getWallpaperPaged()
     suspend fun getDetailWallpaper(id: String)
+
+    val hasFavorite: MutableLiveData<Boolean>
+    suspend fun addFavorite(wallpaper: Wallpaper)
+    suspend fun removeFavorite(wallpaper: Wallpaper)
+    suspend fun checkFavorite(wallpaperId: String)
 }

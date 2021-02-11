@@ -10,36 +10,32 @@ import android.view.View
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
-import com.google.android.play.core.splitinstall.SplitInstallManager
-import com.utsman.core.extensions.viewBinding
-import com.utsman.wallpaper.viewmodel.MainViewModel
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.utsman.wallpaper.R
-import com.utsman.wallpaper.databinding.FragmentHomeBinding
-import com.utsman.wallpaper.adapter.PagingWallpaperAdapter
 import com.utsman.wallpaper.adapter.PagingStateAdapter
+import com.utsman.wallpaper.adapter.PagingWallpaperAdapter
+import com.utsman.wallpaper.databinding.FragmentHomeBinding
 import com.utsman.wallpaper.detail.DetailFragment
 import com.utsman.wallpaper.resString
-import dagger.hilt.android.AndroidEntryPoint
+import com.utsman.wallpaper.viewmodel.MainViewModel
 import kotlinx.coroutines.launch
-import javax.inject.Inject
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-@AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.fragment_home) {
-    private val binding: FragmentHomeBinding? by viewBinding()
 
-    private val pagingAdapter = PagingWallpaperAdapter()
-    private val mainViewModel: MainViewModel by activityViewModels()
-
-    private val pagingStateAdapter by lazy { PagingStateAdapter { pagingAdapter.retry() } }
+    private val binding: FragmentHomeBinding by viewBinding()
+    private val mainViewModel: MainViewModel by sharedViewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding?.run {
+        val pagingAdapter = PagingWallpaperAdapter()
+        val pagingStateAdapter = PagingStateAdapter { pagingAdapter.retry() }
+
+        with(binding) {
             mainViewModel.setToolbarTitle(getString(resString.app_name))
             recyclerViewHome.run {
                 val gridLayout = GridLayoutManager(context, 2).apply {
@@ -72,6 +68,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 itemLoading.run {
                     progressCircular.isVisible = state is LoadState.Loading
                     btnError.isVisible = state is LoadState.Error
+                    recyclerViewHome.isVisible = state is LoadState.NotLoading
 
                     btnError.setOnClickListener {
                         pagingAdapter.retry()
@@ -93,14 +90,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     override fun onResume() {
         super.onResume()
-        mainViewModel.resumeHomeRv(binding?.recyclerViewHome)
+        mainViewModel.resumeHomeRv(binding.recyclerViewHome)
         mainViewModel.onVisibleHome(true)
         mainViewModel.hideToolbarAndFab(false)
     }
 
-    override fun onStop() {
-        super.onStop()
-        mainViewModel.pausedHomeRv(binding?.recyclerViewHome)
+    override fun onPause() {
+        super.onPause()
+        mainViewModel.pausedHomeRv(binding.recyclerViewHome)
         mainViewModel.onVisibleHome(false)
     }
 }

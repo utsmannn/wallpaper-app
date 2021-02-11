@@ -6,26 +6,19 @@
 package com.utsman.wallpaper.viewmodel
 
 import android.os.Parcelable
-import androidx.hilt.Assisted
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.RecyclerView
 import com.utsman.domain.entity.Wallpaper
-import com.utsman.domain.usecase.DatabaseUseCase
 import com.utsman.domain.usecase.WallpapersUseCase
 import kotlinx.coroutines.launch
 
-class MainViewModel @ViewModelInject constructor(
+class MainViewModel(
     private val wallpapersUseCase: WallpapersUseCase,
-    private val databaseUseCase: DatabaseUseCase,
-    @Assisted private val state: SavedStateHandle
+    private val state: SavedStateHandle
 ) : ViewModel() {
     val wallpapers: LiveData<PagingData<Wallpaper>>
         get() = wallpapersUseCase.wallpaperPaged
-
-    val favorites: LiveData<List<Wallpaper>>
-        get() = databaseUseCase.favorites
 
     private val _actionScrollUp = MutableLiveData<Boolean>()
     private val _onVisibleHome = MutableLiveData<Boolean>()
@@ -73,8 +66,4 @@ class MainViewModel @ViewModelInject constructor(
     }
 
     fun hideToolbarAndFab(hide: Boolean) = _hideToolbarAndFab.postValue(hide)
-
-    fun getFavorites() = viewModelScope.launch {
-        databaseUseCase.getFavorite()
-    }
 }

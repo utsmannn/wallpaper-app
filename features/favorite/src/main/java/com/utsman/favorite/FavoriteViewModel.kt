@@ -5,15 +5,14 @@
 
 package com.utsman.favorite
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.utsman.domain.entity.Wallpaper
-import com.utsman.domain.usecase.DatabaseUseCase
+import com.utsman.favorite.usecase.DatabaseUseCase
 import kotlinx.coroutines.launch
 
-class FavoriteViewModel @ViewModelInject constructor(
+class FavoriteViewModel(
     private val databaseUseCase: DatabaseUseCase
 ) : ViewModel() {
 

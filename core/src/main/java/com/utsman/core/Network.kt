@@ -6,6 +6,7 @@
 package com.utsman.core
 
 import com.google.gson.Gson
+import okhttp3.CertificatePinner
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -16,13 +17,14 @@ object Network {
         level = HttpLoggingInterceptor.Level.BASIC
     }
 
-    private fun okHttp() = OkHttpClient.Builder()
+    private fun okHttp(certificatePinner: CertificatePinner) = OkHttpClient.Builder()
         .addInterceptor(loggingInterceptor)
+        .certificatePinner(certificatePinner)
         .build()
 
-    fun builder(url: String, gson: Gson): Retrofit = Retrofit.Builder()
+    fun builder(url: String, gson: Gson, certificatePinner: CertificatePinner): Retrofit = Retrofit.Builder()
         .baseUrl(url)
         .addConverterFactory(GsonConverterFactory.create(gson))
-        .client(okHttp())
+        .client(okHttp(certificatePinner))
         .build()
 }

@@ -13,7 +13,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="transparent_status_bar">#725B5B5B</color>
-    <color name="transparent_bottom_sheet">#80FFFFFF</color>
+    <color name="transparent_bottom_sheet">#C3FFFFFF</color>
 
     <color name="dark">#727272</color>
 </resources>

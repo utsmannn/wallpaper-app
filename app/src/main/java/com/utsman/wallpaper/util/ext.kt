@@ -7,9 +7,15 @@ package com.utsman.wallpaper.util
 
 import android.content.Context
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.OnLifecycleEvent
 import com.google.android.play.core.splitinstall.SplitInstallManager
 import com.google.android.play.core.splitinstall.SplitInstallRequest
 import com.utsman.core.extensions.toast
+import kotlin.properties.ReadWriteProperty
+import kotlin.reflect.KProperty
 
 fun SplitInstallManager.requestFeature(context: Context, feature: String, isInstalled: () -> Unit) {
     val installed = this.installedModules.contains(feature)

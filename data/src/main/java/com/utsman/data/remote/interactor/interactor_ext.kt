@@ -7,7 +7,9 @@ package com.utsman.data.remote.interactor
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.suspendCancellableCoroutine
 import retrofit2.Response
+import kotlin.coroutines.resume
 
 @Suppress("BlockingMethodInNonBlockingContext")
 suspend fun <T : Any> fetchApi(
@@ -23,5 +25,21 @@ suspend fun <T : Any> fetchApi(
         }
     } catch (e: Throwable) {
         emit(ResultState.Error<T>(th = e))
+    }
+}
+
+suspend fun <T : Any> ResultState<T>.getDataWhenSuccess(): T?  = suspendCancellableCoroutine { task ->
+    if (this is ResultState.Success) {
+        if (task.isActive) task.resume(data)
+    } else {
+        if (task.isActive) task.resume(null)
+    }
+}
+
+suspend fun <T : Any> ResultState<T>.getThrowableWhenError(): Throwable?  = suspendCancellableCoroutine { task ->
+    if (this is ResultState.Error) {
+        if (task.isActive) task.resume(th)
+    } else {
+        if (task.isActive) task.resume(null)
     }
 }

@@ -6,17 +6,17 @@
 package com.utsman.wallpaper.adapter.viewholder
 
 import android.view.View
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.utsman.core.extensions.load
-import com.utsman.core.helper.UnsplashBlurHashDecoder
 import com.utsman.domain.entity.Wallpaper
-import com.utsman.wallpaper.databinding.ItemHomeBinding
+import com.utsman.wallpaper.R
 
 class WallpaperViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-    private val binding = ItemHomeBinding.bind(view)
-    fun bind(wallpaper: Wallpaper, onClick: ((Wallpaper) -> Unit)?) = binding.run {
+    fun bind(wallpaper: Wallpaper, onClick: ((Wallpaper) -> Unit)?) = itemView.run {
+        val imageItem = findViewById<ImageView>(R.id.image_item)
         imageItem.load(wallpaper.url, wallpaper.color, wallpaper.blurHash)
-        root.setOnClickListener {
+        setOnClickListener {
             onClick?.invoke(wallpaper)
         }
     }

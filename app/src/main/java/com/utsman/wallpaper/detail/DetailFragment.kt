@@ -5,32 +5,24 @@
 
 package com.utsman.wallpaper.detail
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import android.text.method.LinkMovementMethod
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.play.core.splitinstall.SplitInstallManager
-import com.google.android.play.core.splitinstall.SplitInstallRequest
-import com.utsman.core.extensions.*
+import com.utsman.core.extensions.blurBitmap
+import com.utsman.core.extensions.load
 import com.utsman.data.remote.interactor.ResultState
-import com.utsman.domain.entity.Wallpaper
 import com.utsman.wallpaper.R
 import com.utsman.wallpaper.databinding.FragmentDetailBinding
 import com.utsman.wallpaper.resDrawable
-import com.utsman.wallpaper.util.requestFeature
+import com.utsman.wallpaper.util.DownloaderUtils
 import com.utsman.wallpaper.viewmodel.DetailViewModel
-import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-@AndroidEntryPoint
 class DetailFragment : Fragment(R.layout.fragment_detail) {
 
     companion object {
@@ -39,7 +31,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
     }
 
     private val binding: FragmentDetailBinding? by viewBinding()
-    private val detailViewModel: DetailViewModel by viewModels()
+    private val detailViewModel: DetailViewModel by viewModel()
 
     private val idWallpaper by lazy {
         arguments?.getString("id")
@@ -50,9 +42,6 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
     }
 
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<View>
-
-    @Inject
-    lateinit var splitInstallManager: SplitInstallManager
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -89,7 +78,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                         }
 
                         imageViewDownload.setOnClickListener {
-                            dynamicModuleDownloader(data)
+                            DownloaderUtils.startDownload(data.downloadUrl, requireContext(), idWallpaper)
                         }
                     }
                     is ResultState.Error -> {
@@ -107,25 +96,6 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                 }
 
                 imageViewFavorite.setImageResource(favoriteIconRes)
-            }
-        }
-    }
-
-    private fun dynamicModuleDownloader(data: Wallpaper) {
-        val downloader = "downloader"
-        splitInstallManager.requestFeature(requireContext(), downloader) {
-            context?.withPermissions { _, deniedList ->
-                if (deniedList.isEmpty()) {
-                    val downloaderClass = Class.forName("com.utsman.downloader.DownloaderUtils")
-                    val classInstance = downloaderClass.newInstance()
-                    val method = classInstance::class.java.getMethod(
-                        "startDownload",
-                        String::class.java,
-                        Context::class.java,
-                        String::class.java
-                    )
-                    method.invoke(classInstance, data.downloadUrl, requireContext(), idWallpaper)
-                }
             }
         }
     }

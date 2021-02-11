@@ -1,9 +1,9 @@
 /*
- * Created by Muhammad Utsman on 6/2/21 10:01 PM
+ * Created by Muhammad Utsman on 8/2/21 4:39 PM
  * Copyright (c) 2021
  */
 
-package com.utsman.downloader
+package com.utsman.wallpaper.util
 
 import android.app.DownloadManager
 import android.content.Context
@@ -12,13 +12,13 @@ import android.os.Environment
 import com.utsman.core.extensions.logd
 import com.utsman.core.extensions.toast
 
-class DownloaderUtils {
+object DownloaderUtils {
 
     init {
         logd("downloader utils created...")
     }
 
-    fun startDownload(url: String, context: Context, id: String) {
+    fun startDownload(url: String, context: Context, id: String?) {
         logd("function download started...")
         val downloadManager = context.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
 

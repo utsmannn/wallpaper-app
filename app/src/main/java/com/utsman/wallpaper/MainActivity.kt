@@ -6,33 +6,30 @@
 package com.utsman.wallpaper
 
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.NavHostFragment
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.play.core.splitinstall.SplitInstallManager
 import com.utsman.core.extensions.getStatusBarHeight
 import com.utsman.core.extensions.makeStatusBarTransparent
-import com.utsman.core.extensions.viewBinding
 import com.utsman.wallpaper.databinding.ActivityMainBinding
 import com.utsman.wallpaper.util.requestFeature
 import com.utsman.wallpaper.viewmodel.MainViewModel
-import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
+import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-@AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(layout.activity_main) {
 
     private val binding: ActivityMainBinding by viewBinding()
-    private val mainViewModel: MainViewModel by viewModels()
+    private val mainViewModel: MainViewModel by viewModel()
 
-    @Inject
-    lateinit var splitInstallManager: SplitInstallManager
+    private val splitInstallManager: SplitInstallManager by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding.run {
+        with(binding) {
             makeStatusBarTransparent(fakeStatusBar)
             transparentStatusBar.layoutParams.height = getStatusBarHeight()
             val navHostFragment =

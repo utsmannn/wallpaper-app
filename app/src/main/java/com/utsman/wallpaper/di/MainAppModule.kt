@@ -5,21 +5,19 @@
 
 package com.utsman.wallpaper.di
 
-import android.content.Context
+import androidx.lifecycle.SavedStateHandle
 import com.google.android.play.core.splitinstall.SplitInstallManagerFactory
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ApplicationComponent
-import dagger.hilt.android.qualifiers.ApplicationContext
-import javax.inject.Singleton
+import com.utsman.wallpaper.viewmodel.DetailViewModel
+import com.utsman.wallpaper.viewmodel.MainViewModel
+import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.dsl.module
 
-@Module
-@InstallIn(ApplicationComponent::class)
 object MainAppModule {
 
-    @Provides
-    @Singleton
-    fun provideSplitInstallManager(@ApplicationContext context: Context) =
-        SplitInstallManagerFactory.create(context)
+    val module = module {
+        single { SplitInstallManagerFactory.create(get()) }
+        single { SavedStateHandle() }
+        viewModel { MainViewModel(get(), get()) }
+        viewModel { DetailViewModel(get()) }
+    }
 }

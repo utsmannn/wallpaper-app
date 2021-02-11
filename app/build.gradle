@@ -9,7 +9,7 @@ apply from: "$rootDir/dependencies/plugins.gradle"
 
 android {
 
-    dynamicFeatures = [':downloader', ':features:favorite']
+    dynamicFeatures = [':features:favorite']
     defaultConfig {
         applicationId "com.utsman.wallpaper"
     }
@@ -47,4 +47,7 @@ dependencies {
     api 'androidx.navigation:navigation-fragment-ktx:2.3.3'
     api 'androidx.navigation:navigation-ui-ktx:2.3.3'
     api 'androidx.navigation:navigation-dynamic-features-fragment:2.3.3'
+
+    // leak canary
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.6'
 }

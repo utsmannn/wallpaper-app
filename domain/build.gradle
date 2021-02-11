@@ -7,8 +7,19 @@ apply plugin: 'com.android.library'
 apply from: "$rootDir/dependencies/plugins.gradle"
 
 apply from: "$rootDir/dependencies/android.gradle"
+
+//android {
+//    testOptions {
+//        unitTests {
+//            includeAndroidResources = true
+//        }
+//    }
+//}
+
+
 apply from: "$rootDir/dependencies/commons.gradle"
 apply from: "$rootDir/dependencies/deps.gradle"
+apply from: "$rootDir/dependencies/test.gradle"
 
 dependencies {
     implementation project(":core")

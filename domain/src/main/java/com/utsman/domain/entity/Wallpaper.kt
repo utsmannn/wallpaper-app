@@ -13,4 +13,18 @@ data class Wallpaper(
     val downloadUrl: String,
     val blurHash: String,
     val color: String
-)
+) {
+    companion object {
+        fun createInstanceTest(
+            id: String = "",
+            url: String = "",
+            urlMedium: String = "",
+            author: String = "",
+            downloadUrl: String = "",
+            blurHash: String = "",
+            color: String = ""
+        ): Wallpaper {
+            return Wallpaper(id, url, urlMedium, author, downloadUrl, blurHash, color)
+        }
+    }
+}

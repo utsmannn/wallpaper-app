@@ -5,38 +5,45 @@
 
 package com.utsman.favorite
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.GridLayoutManager
-import com.utsman.core.extensions.logd
-import com.utsman.core.extensions.viewBinding
-import com.utsman.data.local.database.FavoriteDataBase
-import com.utsman.domain.usecase.DatabaseInteractor
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.utsman.favorite.databinding.FragmentFavoriteBinding
 import com.utsman.wallpaper.adapter.PagingWallpaperAdapter
 import com.utsman.wallpaper.detail.DetailFragment
 import com.utsman.wallpaper.resString
 import com.utsman.wallpaper.viewmodel.MainViewModel
-import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import javax.inject.Inject
-
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.context.loadKoinModules
+import org.koin.core.context.unloadKoinModules
 
 class FavoriteFragment : Fragment(R.layout.fragment_favorite) {
 
-    private val binding: FragmentFavoriteBinding? by viewBinding()
+    private val binding: FragmentFavoriteBinding by viewBinding()
 
-    private val mainViewModel: MainViewModel by activityViewModels()
+    private val mainViewModel: MainViewModel by sharedViewModel()
+    private val favoriteViewModel: FavoriteViewModel by viewModel()
     private val pagingAdapter = PagingWallpaperAdapter()
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        loadKoinModules(FavoriteModule.module)
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        unloadKoinModules(FavoriteModule.module)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -61,8 +68,7 @@ class FavoriteFragment : Fragment(R.layout.fragment_favorite) {
                 mainViewModel.hideToolbarAndFab(true)
             }
 
-            mainViewModel.getFavorites()
-            mainViewModel.favorites.observe(viewLifecycleOwner) { data ->
+            favoriteViewModel.favorites.observe(viewLifecycleOwner) { data ->
                 containerEmpty.isVisible = data.isEmpty()
                 lifecycleScope.launch {
                     pagingAdapter.submitData(PagingData.from(data))
@@ -71,9 +77,6 @@ class FavoriteFragment : Fragment(R.layout.fragment_favorite) {
         }
     }
 
-    private fun inject() {
-
-    }
 
     override fun onResume() {
         super.onResume()
